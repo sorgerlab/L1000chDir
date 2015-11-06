@@ -1,47 +1,35 @@
-addpath('../LJP_library/chDirCode');
-addpath('../LJP_library');
-addpath('m:/GitHub/L1ktools/Matlab/Lib/')
-addpath('d:/GitHub/L1ktools/Matlab/Lib/')
+function [t_chDir, chDir, L1000genes] = process_L1000QNORM(t_conditions, t_files, folder, VariableNames)
+%
+% [t_chDir, chDir, L1000genes] = process_L1000QNORM(t_conditions, t_files, folder, VariableNames)
+%
+%	calculation of the chDir across conditions and plates (see
+%	example_L1000processing.m)
+%
+%   t_conditions:   list of unique conditions (table with set of keys)
+%   t_files:        list of QNORM files (table with file names 
+%                       and condition keys). Need field 'filename' and keys
+%                       matching t_conditions
+%   folder:         folder where the QNORM files are stored
+%   VariableNames:  variables in the gct file (cdesc) to be saved and
+%                       converted
+%
+%   t_chDir:        table with conditions and statistics
+%   chDir:          characteristic directions corresponding to t_chDir
+%   L1000genes:     genes name and order in L1000 files
+%
 
-folder = './allQNORM/';
-files = dir([folder 'L*gct']);
-files = {files(:).name}';
-
-%%
-% get all the files and information about them
-t_files = table(files, cellfun2(@(x) x{1}{1}, regexp(files, '(LJP00[5-6])_', 'tokens')), ...
-    cellfun2(@(x) x{1}{1}, regexp(files, 'LJP00[5-6]_(\w+)_[0-9]*H_', 'tokens')), ...
-    cell2mat(cellfun2(@(x) str2num(x{1}{1}), regexp(files, '_([0-9]*)H_', 'tokens'))), ...
-    cell2mat(cellfun2(@(x) str2num(x{1}{1}), regexp(files, '_X(\d)_', 'tokens'))), ...
-    cell2mat(cellfun2(@(x) str2num(x{1}{1}), regexp(files, '_n(\d*)x', 'tokens'))), ...
-    'variablenames', {'filename' 'LJPplate' 'CellLine' 'Time' 'replicateCount' 'Ncond'});
-
-VariableNames = {
-    'cell_id' 'CellLine'
-    'rna_plate' 'LJPplate'
-    'pert_iname' 'DrugName'
-    'pert_id' 'BRDid'
-    'x_hmsl_id' 'HMSLid'
-    'pert_dose' 'Conc'
-    'pert_time' 'Time'};
-
-% get all different conditions (cell line, LJPplate, time point)
-t_conditions = unique(t_files(:,{'CellLine' 'LJPplate' 'Time'}));
-
-t_chDir_LJP56 = table;
-all_chDir_LJP56 = [];
+t_chDir = table;
+chDir = [];
 L1000genes = [];
 
-%%%%%%%%% calculation of the chDir across conditions and plates
-%   This replace the function 'main' and explicit 'mergeChdirReplicates'
 
 
 % loop throught the conditions
 for i=1:height(t_conditions)
     fprintf('\n\n\t --> %i out of %i\n\n\n', i, height(t_conditions));
     
-    t_plates = t_files( eqtable(t_conditions(i,:), t_files(:,{'CellLine' 'LJPplate' 'Time'})) ...
-        & t_files.Ncond>100, :);
+    % select the plates with at least 90 conditions measures
+    t_plates = t_files( eqtable(t_conditions(i,:), t_files) & t_files.Ncond>90, :);
     
     % all replicates of the selected condition
     plates_chDir = [];   
@@ -65,8 +53,6 @@ for i=1:height(t_conditions)
             table(cell2mat(cellfun2(@(x) x.pMetric, plateRes.replicateChdirs)), ...
             j*ones(sum(expmIdx),1),'variablenames',{'pMetric' 'plate_id'})];
     end
-
-    t_idx.rna_plate = regexpcelltokens(t_idx.rna_plate, '^(LJP00[56])_');
     
     t_idx.Properties.VariableNames(VariableNames(:,1)) = VariableNames(:,2);
     t_trt = group_counts(t_idx, 1:(width(t_idx)-2));
@@ -102,19 +88,9 @@ for i=1:height(t_conditions)
         
     end
     
-    uniqueID = TableToString(t_trt(:,{'LJPplate' 'CellLine' 'Time' 'BRDid' 'Conc'}),0);
-    uniqueID = table2cell(uniqueID);
-    uniqueID(:,1) = strcat(uniqueID(:,1) ,'_');
-    uniqueID(:,2) = strcat(uniqueID(:,2) ,'_');
-    uniqueID(:,3) = strcat(uniqueID(:,3) ,'H:');
-    uniqueID(:,4) = strcat(uniqueID(:,4) ,':');
-    uniqueID = cellstr2str(uniqueID,'');
-    
-    t_chDir_LJP56 = [t_chDir_LJP56
-        t_trt(:,1:(end-1)) table(pvalue, ACD, meanPmetric, uniqueID)];
-    all_chDir_LJP56 = [all_chDir_LJP56; merged_chDir];
+    t_chDir = [t_chDir
+        t_trt(:,1:(end-1)) table(pvalue, ACD, meanPmetric)];
+    chDir = [chDir; merged_chDir];
     
 end
-t_chDir_LJP56 = TableToCategorical(t_chDir_LJP56);
-
-save compiled_LJP_chDir.mat L1000genes all_chDir_LJP56 t_chDir_LJP56
+t_chDir = TableToCategorical(t_chDir);

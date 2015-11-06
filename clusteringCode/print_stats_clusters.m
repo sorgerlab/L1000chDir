@@ -1,5 +1,27 @@
-function print_stats_clusters(t_in, folder)
+function print_stats_clusters(t_in, folder, discrete_stats_fields, cont_stats_fields, add_fields)
+% print_stats_clusters(t_in, folder, discrete_stats_fields, cont_stats_fields, add_fields))
+%   one file per cluster with some statistics is saved in the folder
+%   
+%   t_in:       the output of clustering
+%   folder:     where the reports will be saved
+%   discrete_stats_fields: categorie fields to be saved (e.g. Cell
+%                              line, Time, DrugClass)
+%   cont_stats_fields:     continuous fields to be saved (e.g.
+%                              GRvalue); quartiles are reported
+%   add_fields:            additional fields reported in the list of perturbations
+%
 
+
+
+if ~exist('discrete_stats_fields', 'var') || isempty(discrete_stats_fields)
+    discrete_stats_fields = {'CellLine' 'DrugNameTarget' 'Conc' 'Time' 'DrugClass' 'cellular_function'};
+end
+if ~exist('cont_stats_fields', 'var') || isempty(cont_stats_fields)
+    cont_stats_fields = {'GRvalue' 'log10pvals'};
+end
+if ~exist('add_fields', 'var') || isempty(add_fields)
+    add_fields = {'LJPplate' 'HMSLid'};
+end
 
 if ~exist('folder','var')
     folder = 'temp_clusters';
@@ -13,14 +35,15 @@ else
 end
 
 t_in = [t_in, table(log10(t_in.pvalue+1e-6), 'variablenames', {'log10pvals'})];
-t_in.DrugNameTarget = categorical(strcat(cellstr(t_in.DrugName), ' (', cellstr(t_in.nominal_target), ')'));
+if isvariable(t_in, 'nominal_target')
+    t_in.DrugNameTarget = categorical(strcat(cellstr(t_in.DrugName), ...
+        ' (', cellstr(t_in.nominal_target), ')'));
+else
+    t_in.DrugNameTarget = t_in.DrugName;
+end
     
 for iC = 1:max(t_in.Cidx);
-    
-    discrete_stats_fields = {'CellLine' 'DrugNameTarget' 'Conc' 'Time' 'DrugClass' 'cellular_function'};
-    cont_stats_fields = {'GRvalue' 'log10pvals'};
-    add_fields = {'LJPplate' 'HMSLid'};
-    
+        
     file = fopen([folder '/Clust_stats_' num2str(iC) '.tsv'],'w');
     
     fprintf(file, 'Statistics for the cluster #%i\n', iC);
