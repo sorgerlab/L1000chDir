@@ -1,0 +1,66 @@
+Statistics for the cluster #4
+---------------------------------------
+
+#perturbations:	16
+
+
+* CellLine distribution and count:
+	          BT20:	100.0%	16
+
+* DrugNameTarget distribution and count:
+	 BRD-K20696416:	  6.3%	 1
+	 BRD-U60236422:	  6.3%	 1
+	 BRD-U64521890:	 18.8%	 3
+	        CYT387:	  6.3%	 1
+	    LDN-193189:	 12.5%	 2
+	       NU-7441:	  6.3%	 1
+	     PF-431396:	  6.3%	 1
+	    PHA-665752:	  6.3%	 1
+	      SU-11274:	  6.3%	 1
+	     TG-101348:	  6.3%	 1
+	    crizotinib:	  6.3%	 1
+	     dovitinib:	  6.3%	 1
+	     foretinib:	  6.3%	 1
+
+* Conc distribution and count:
+	          0.37:	  6.3%	 1
+	          1.11:	 12.5%	 2
+	          3.33:	 12.5%	 2
+	            10:	 68.8%	11
+
+* Time distribution and count:
+	            24:	100.0%	16
+
+* DrugClass distribution and count:
+	             -:	100.0%	16
+
+* cellular_function distribution and count:
+	             -:	100.0%	16
+
+* GRvalue distribution:
+	[min,	25%	med	75%	max]:
+	[ 0.09	 0.23	 0.50	 0.79	 0.93]
+
+* log10pvals distribution:
+	[min,	25%	med	75%	max]:
+	[-3.38	-2.40	-1.97	-1.66	-1.31]
+
+----------------------------------------
+all perturbations
+CellLine	DrugNameTarget	Conc	Time	DrugClass	cellular_function	GRvalue	log10pvals	LJPplate	HMSLid
+BT20	NU-7441	10	24	-	-	0.88546	-2.2856	LJP005_BT20_24H	HMSL10061
+BT20	PF-431396	3.33	24	-	-	0.54355	-1.3282	LJP005_BT20_24H	HMSL10116
+BT20	BRD-K20696416	10	24	-	-	0.085784	-1.9132	LJP005_BT20_24H	HMSL10122
+BT20	dovitinib	10	24	-	-	0.27662	-1.6115	LJP005_BT20_24H	HMSL10127
+BT20	LDN-193189	1.11	24	-	-	0.46332	-1.9763	LJP005_BT20_24H	HMSL10115
+BT20	LDN-193189	0.37	24	-	-	0.75566	-1.3086	LJP005_BT20_24H	HMSL10115
+BT20	foretinib	10	24	-	-	0.30293	-2.6496	LJP005_BT20_24H	HMSL10157
+BT20	SU-11274	10	24	-	-	0.81038	-2.0296	LJP005_BT20_24H	HMSL10119
+BT20	TG-101348	10	24	-	-	0.35647	-2.8122	LJP005_BT20_24H	HMSL10141
+BT20	BRD-U60236422	10	24	-	-	0.18254	-3.3757	LJP005_BT20_24H	WH-4-025
+BT20	CYT387	10	24	-	-	0.78605	-1.4276	LJP005_BT20_24H	HMSL10140
+BT20	crizotinib	10	24	-	-	0.093964	-1.7849	LJP005_BT20_24H	HMSL10027
+BT20	PHA-665752	10	24	-	-	0.93199	-1.9633	LJP005_BT20_24H	HMSL10125
+BT20	BRD-U64521890	10	24	-	-	0.79588	-2.5227	LJP005_BT20_24H	XMD16-144
+BT20	BRD-U64521890	3.33	24	-	-	0.64837	-2.2541	LJP005_BT20_24H	XMD16-144
+BT20	BRD-U64521890	1.11	24	-	-	0.15391	-1.6998	LJP005_BT20_24H	XMD16-144

@@ -26,24 +26,26 @@ Nclust = max(Cidx)-1;
 
 %% distributions
 
-DrugCellfraction = zeros(max(Cidx), length(pv.CellLine));
-DrugTPfraction = zeros(max(Cidx), length(pv.TimePoint));
-DrugConcfraction = zeros(max(Cidx), length(pv.Conc));
-DrugCellFctfraction = zeros(max(Cidx), length(pv.DrugClass));
+Cellfraction = zeros(max(Cidx), length(pv.CellLine));
+TPfraction = zeros(max(Cidx), length(pv.TimePoint));
+Concfraction = zeros(max(Cidx), length(pv.Conc));
+DrugClfraction = zeros(max(Cidx), length(pv.DrugClass));
 Clustercount = zeros(max(Cidx),1);
 
 for i=1:max(Cidx)
     idx = t_clustered_data.Cidx==i;
     Clustercount(i) = sum(idx);
-    DrugCellfraction(i,:) = hist_cat(t_clustered_data.CellLine(idx), pv.CellLine);
-    DrugTPfraction(i,:) = hist(t_clustered_data.Time(idx), pv.TimePoint);
-    DrugConcfraction(i,:) = hist(t_clustered_data.Conc(idx), pv.Conc);
-    DrugCellFctfraction(i,:) = hist_cat(t_clustered_data.DrugClass(idx), pv.DrugClass);
+    Cellfraction(i,:) = hist_cat(t_clustered_data.CellLine(idx), pv.CellLine);
+    TPfraction(i,:) = sum(repmat(t_clustered_data.Time(idx),1,length(pv.TimePoint)) ...
+        == repmat(ToRow(pv.TimePoint),sum(idx),1));
+    Concfraction(i,:) = sum(repmat(t_clustered_data.Conc(idx),1,length(pv.Conc)) ...
+        == repmat(ToRow(pv.Conc),sum(idx),1));
+    DrugClfraction(i,:) = hist_cat(t_clustered_data.DrugClass(idx), pv.DrugClass);
 end
-DrugCellfraction = NormSumUnit(DrugCellfraction,2);
-DrugTPfraction = NormSumUnit(DrugTPfraction,2);
-DrugConcfraction = NormSumUnit(DrugConcfraction,2);
-DrugCellFctfraction = NormSumUnit(DrugCellFctfraction,2);
+Cellfraction = NormSumUnit(Cellfraction,2);
+TPfraction = NormSumUnit(TPfraction,2);
+Concfraction = NormSumUnit(Concfraction,2);
+DrugClfraction = NormSumUnit(DrugClfraction,2);
 
 
 
@@ -83,8 +85,8 @@ xlim([.5 Nclust+1.5])
 
 
 a = get_newaxes([xpos ypos(2,1) xwidth ypos(2,2)],1);
-h = bar(CLpos, DrugCellfraction, barw, 'stack');
-hl = legend(h(end:-1:1), cellstr(pv.CellLine(end:-1:1)),'location','eastoutside');
+h = bar(CLpos, Cellfraction, barw, 'stack');
+hl = legend(h, cellstr(pv.CellLine),'location','eastoutside');
 posl = get(hl,'position');
 set(hl,'position',[xlpos posl(2:4)])
 for i=1:length(h)
@@ -94,7 +96,7 @@ ylim([0 1.01])
 
 
 a(2) = get_newaxes([xpos ypos(3,1) xwidth ypos(3,2)],1);
-h = bar(CLpos, DrugCellFctfraction, barw, 'stack');
+h = bar(CLpos, DrugClfraction, barw, 'stack');
 hl = legend(h, cellstr(pv.DrugClass),'location','eastoutside','interpreter','none');
 posl = get(hl,'position');
 set(hl,'position',[xlpos posl(2:4)])
@@ -103,13 +105,13 @@ cols = [3 6];
 ylim([0 1.01])
 
 for i=1:length(h)
-    set(h(i),'facecolor',pv.DrugClassColors(strcmp(get(h(i),'DisplayName'), pv.DrugClass),:));
+    set(h(i),'facecolor',pv.DrugClassColors(i,:));
 end
 
 a(3) = get_newaxes([xpos ypos(6,1) xwidth ypos(6,2)],1);
-h = bar(CLpos, DrugTPfraction, barw, 'stack');
+h = bar(CLpos, TPfraction, barw, 'stack');
 for i=1:length(h)
-    set(h(i),'facecolor',(i-1)*[1 1 1]/(length(h)-1));
+    set(h(i),'facecolor',pv.TimePointColors(i,:));
 end
 hl = legend(h, strcat(cellfun2(@num2str,num2cell(pv.TimePoint)),'h'),'location','eastoutside');
 posl = get(hl,'position');
@@ -117,7 +119,7 @@ set(hl,'position',[xlpos posl(2:4)])
 ylim([0 1.02])
 
 a(4) = get_newaxes([xpos ypos(7,1) xwidth ypos(7,2)],1);
-h = bar(CLpos, DrugConcfraction, barw, 'stack');
+h = bar(CLpos, Concfraction, barw, 'stack');
 for i=1:length(h)
     set(h(i),'facecolor',pv.ConcColors(i,:));
 end

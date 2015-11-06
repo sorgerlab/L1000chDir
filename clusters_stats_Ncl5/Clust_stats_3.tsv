@@ -1,0 +1,78 @@
+Statistics for the cluster #3
+---------------------------------------
+
+#perturbations:	29
+
+
+* CellLine distribution and count:
+	          BT20:	100.0%	29
+
+* DrugNameTarget distribution and count:
+	      AZD-8330:	 10.3%	 3
+	 BRD-U60236422:	  6.9%	 2
+	    PD-0325901:	  6.9%	 2
+	     PD-184352:	  6.9%	 2
+	       TWS-119:	  6.9%	 2
+	     dasatinib:	  6.9%	 2
+	     erlotinib:	 13.8%	 4
+	     neratinib:	 13.8%	 4
+	     pelitinib:	 13.8%	 4
+	    trametinib:	 13.8%	 4
+
+* Conc distribution and count:
+	          0.04:	  6.9%	 2
+	          0.12:	  3.4%	 1
+	          0.37:	 20.7%	 6
+	          1.11:	 17.2%	 5
+	          3.33:	 27.6%	 8
+	            10:	 24.1%	 7
+
+* Time distribution and count:
+	            24:	100.0%	29
+
+* DrugClass distribution and count:
+	             -:	100.0%	29
+
+* cellular_function distribution and count:
+	             -:	100.0%	29
+
+* GRvalue distribution:
+	[min,	25%	med	75%	max]:
+	[ 0.00	 0.29	 0.48	 0.71	 0.96]
+
+* log10pvals distribution:
+	[min,	25%	med	75%	max]:
+	[-2.33	-1.66	-1.51	-1.44	-1.33]
+
+----------------------------------------
+all perturbations
+CellLine	DrugNameTarget	Conc	Time	DrugClass	cellular_function	GRvalue	log10pvals	LJPplate	HMSLid
+BT20	neratinib	3.33	24	-	-	0.29494	-1.3694	LJP005_BT20_24H	HMSL10018
+BT20	neratinib	0.37	24	-	-	0.26965	-1.4381	LJP005_BT20_24H	HMSL10018
+BT20	neratinib	0.12	24	-	-	0.25526	-1.3958	LJP005_BT20_24H	HMSL10018
+BT20	neratinib	0.04	24	-	-	0.91964	-1.385	LJP005_BT20_24H	HMSL10018
+BT20	PD-0325901	10	24	-	-	0.82847	-1.4996	LJP005_BT20_24H	HMSL10101
+BT20	PD-0325901	0.37	24	-	-	0.58703	-1.5028	LJP005_BT20_24H	HMSL10101
+BT20	dasatinib	10	24	-	-	0.082047	-1.3273	LJP005_BT20_24H	HMSL10020
+BT20	dasatinib	3.33	24	-	-	0.001131	-1.9147	LJP005_BT20_24H	HMSL10020
+BT20	AZD-8330	1.11	24	-	-	0.3549	-1.4366	LJP005_BT20_24H	HMSL10164
+BT20	AZD-8330	0.37	24	-	-	0.72151	-1.4404	LJP005_BT20_24H	HMSL10164
+BT20	pelitinib	1.11	24	-	-	0.20975	-1.5079	LJP005_BT20_24H	HMSL10159
+BT20	pelitinib	0.04	24	-	-	0.48134	-1.4792	LJP005_BT20_24H	HMSL10159
+BT20	PD-184352	3.33	24	-	-	0.60268	-1.5076	LJP005_BT20_24H	HMSL10048
+BT20	TWS-119	10	24	-	-	0.59978	-2.1432	LJP005_BT20_24H	HMSL10111
+BT20	erlotinib	10	24	-	-	0.067082	-1.4379	LJP005_BT20_24H	HMSL10097
+BT20	erlotinib	0.37	24	-	-	0.92022	-1.4506	LJP005_BT20_24H	HMSL10097
+BT20	BRD-U60236422	1.11	24	-	-	0.78727	-1.6308	LJP005_BT20_24H	WH-4-025
+BT20	trametinib	10	24	-	-	0.70532	-1.6162	LJP005_BT20_24H	HMSL10142
+BT20	AZD-8330	10	24	-	-	0.18665	-1.6484	LJP005_BT20_24H	HMSL10164
+BT20	pelitinib	3.33	24	-	-	0.29189	-1.4383	LJP005_BT20_24H	HMSL10159
+BT20	pelitinib	0.37	24	-	-	0.88542	-2.0624	LJP005_BT20_24H	HMSL10159
+BT20	PD-184352	10	24	-	-	0.52082	-1.8914	LJP005_BT20_24H	HMSL10048
+BT20	TWS-119	3.33	24	-	-	0.47416	-1.8566	LJP005_BT20_24H	HMSL10111
+BT20	erlotinib	3.33	24	-	-	0.3419	-1.6527	LJP005_BT20_24H	HMSL10097
+BT20	erlotinib	1.11	24	-	-	0.59302	-1.6964	LJP005_BT20_24H	HMSL10097
+BT20	BRD-U60236422	3.33	24	-	-	0.70746	-2.3315	LJP005_BT20_24H	WH-4-025
+BT20	trametinib	3.33	24	-	-	0.29809	-1.6262	LJP005_BT20_24H	HMSL10142
+BT20	trametinib	1.11	24	-	-	0.95561	-1.6337	LJP005_BT20_24H	HMSL10142
+BT20	trametinib	0.37	24	-	-	0.30287	-1.5912	LJP005_BT20_24H	HMSL10142

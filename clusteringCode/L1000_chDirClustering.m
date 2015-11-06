@@ -27,7 +27,7 @@ parfor i=1:Nrepeat
     oldCidx(:,i) = oldCidx(:,i).*(max(temp)>=Cutoff)' ...
         + (Nclust+1)*(max(temp)<Cutoff)';
     fprintf('%.1f ', obj_fct(end));
-    
+    if mod(i,20)==0, fprintf('\n'); end
     wCidx(:,:,i) = temp;
 end
 fprintf('\n');

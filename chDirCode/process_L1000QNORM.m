@@ -48,16 +48,19 @@ for i=1:height(t_conditions)
             cell2mat(cellfun2(@(x) x.chdir', plateRes.replicateChdirs))];
         gct_labels = cell2table(gctdata.cdesc, 'variablenames', gctdata.chd');
         t_idx = [t_idx;
-            gct_labels(expmIdx,{'cell_id' 'rna_plate' 'pert_type' ...
-            'pert_iname' 'pert_id' 'x_hmsl_id' 'pert_dose' 'pert_time'}) ...
+            gct_labels(expmIdx,[VariableNames(:,1)' 'pert_type']) ...
             table(cell2mat(cellfun2(@(x) x.pMetric, plateRes.replicateChdirs)), ...
             j*ones(sum(expmIdx),1),'variablenames',{'pMetric' 'plate_id'})];
+    end
+    
+    if isvariable(t_idx, 'rna_plate')
+        t_idx.rna_plate = regexprep(t_idx.rna_plate, '_X[0-9]', '');
     end
     
     t_idx.Properties.VariableNames(VariableNames(:,1)) = VariableNames(:,2);
     t_trt = group_counts(t_idx, 1:(width(t_idx)-2));
     
-    % merge the replicates of the selected condition
+    %% merge the replicates of the selected condition
     
     % null distribution of cosine distances
     cosDistByRepCount = permuByRepCount(plates_chDir',unique(t_trt.counts));
@@ -66,6 +69,7 @@ for i=1:height(t_conditions)
     pvalue = NaN(height(t_trt),1);
     ACD = pvalue;
     meanPmetric = pvalue;
+    Repcout = pvalue;
     parfor j=1:height(t_trt)
         idx = eqtable(t_trt(j,:), t_idx);
         assert(t_trt.counts(j) == sum(idx))
@@ -89,7 +93,7 @@ for i=1:height(t_conditions)
     end
     
     t_chDir = [t_chDir
-        t_trt(:,1:(end-1)) table(pvalue, ACD, meanPmetric)];
+        t_trt(:,1:(end-1)) table(pvalue, ACD, meanPmetric) t_trt(:,end)];
     chDir = [chDir; merged_chDir];
     
 end

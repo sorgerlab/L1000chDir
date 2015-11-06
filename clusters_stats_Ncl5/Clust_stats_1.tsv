@@ -1,0 +1,77 @@
+Statistics for the cluster #1
+---------------------------------------
+
+#perturbations:	25
+
+
+* CellLine distribution and count:
+	          BT20:	100.0%	25
+
+* DrugNameTarget distribution and count:
+	     AS-601245:	  8.0%	 2
+	 BRD-K24496482:	  4.0%	 1
+	     CGP-60474:	  4.0%	 1
+	   HG-5-113-01:	  4.0%	 1
+	    LDN-193189:	  8.0%	 2
+	     PF-431396:	  4.0%	 1
+	     PF-477736:	  8.0%	 2
+	       WZ-3105:	 16.0%	 4
+	  mitoxantrone:	 24.0%	 6
+	     nilotinib:	  4.0%	 1
+	     pelitinib:	  4.0%	 1
+	     radicicol:	  4.0%	 1
+	  withaferin-a:	  8.0%	 2
+
+* Conc distribution and count:
+	          0.04:	  8.0%	 2
+	          0.12:	 12.0%	 3
+	          0.37:	  4.0%	 1
+	          1.11:	 12.0%	 3
+	          3.33:	 20.0%	 5
+	            10:	 44.0%	11
+
+* Time distribution and count:
+	            24:	100.0%	25
+
+* DrugClass distribution and count:
+	             -:	100.0%	25
+
+* cellular_function distribution and count:
+	             -:	100.0%	25
+
+* GRvalue distribution:
+	[min,	25%	med	75%	max]:
+	[ 0.01	 0.17	 0.48	 0.77	 1.00]
+
+* log10pvals distribution:
+	[min,	25%	med	75%	max]:
+	[-4.51	-2.99	-2.62	-1.77	-1.31]
+
+----------------------------------------
+all perturbations
+CellLine	DrugNameTarget	Conc	Time	DrugClass	cellular_function	GRvalue	log10pvals	LJPplate	HMSLid
+BT20	HG-5-113-01	10	24	-	-	0.0075748	-3.0501	LJP005_BT20_24H	HMSL10015
+BT20	mitoxantrone	3.33	24	-	-	0.77069	-2.8236	LJP005_BT20_24H	-666
+BT20	mitoxantrone	1.11	24	-	-	0.10635	-2.6381	LJP005_BT20_24H	-666
+BT20	mitoxantrone	0.37	24	-	-	0.70239	-2.53	LJP005_BT20_24H	-666
+BT20	mitoxantrone	0.12	24	-	-	0.7636	-2.6178	LJP005_BT20_24H	-666
+BT20	mitoxantrone	0.04	24	-	-	0.16876	-1.397	LJP005_BT20_24H	-666
+BT20	WZ-3105	10	24	-	-	0.99551	-1.3064	LJP005_BT20_24H	HMSL10084
+BT20	WZ-3105	1.11	24	-	-	0.11481	-2.9867	LJP005_BT20_24H	HMSL10084
+BT20	WZ-3105	0.04	24	-	-	0.33629	-1.9381	LJP005_BT20_24H	HMSL10084
+BT20	PF-431396	10	24	-	-	0.28872	-3.3002	LJP005_BT20_24H	HMSL10116
+BT20	CGP-60474	0.12	24	-	-	0.26015	-2.8011	LJP005_BT20_24H	HMSL10025
+BT20	LDN-193189	3.33	24	-	-	0.055851	-2.9952	LJP005_BT20_24H	HMSL10115
+BT20	withaferin-a	3.33	24	-	-	0.57687	-3.251	LJP005_BT20_24H	-666
+BT20	pelitinib	10	24	-	-	0.6308	-2.5589	LJP005_BT20_24H	HMSL10159
+BT20	PF-477736	10	24	-	-	0.91662	-1.6017	LJP005_BT20_24H	HMSL10112
+BT20	PF-477736	3.33	24	-	-	0.088437	-1.5107	LJP005_BT20_24H	HMSL10112
+BT20	nilotinib	10	24	-	-	0.26385	-2.6002	LJP005_BT20_24H	HMSL10099
+BT20	AS-601245	10	24	-	-	0.16609	-1.7442	LJP005_BT20_24H	AS601245;JNK inhibitor V
+BT20	AS-601245	3.33	24	-	-	0.85138	-1.7741	LJP005_BT20_24H	AS601245;JNK inhibitor V
+BT20	mitoxantrone	10	24	-	-	0.86459	-2.7849	LJP005_BT20_24H	-666
+BT20	WZ-3105	0.12	24	-	-	0.48181	-2.4235	LJP005_BT20_24H	HMSL10084
+BT20	LDN-193189	10	24	-	-	0.51736	-3.0264	LJP005_BT20_24H	HMSL10115
+BT20	withaferin-a	10	24	-	-	0.45418	-2.7744	LJP005_BT20_24H	-666
+BT20	radicicol	10	24	-	-	0.70577	-4.5086	LJP005_BT20_24H	-666
+BT20	BRD-K24496482	1.11	24	-	-	0.97069	-1.5456	LJP005_BT20_24H	HMSL10046
