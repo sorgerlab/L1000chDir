@@ -1,10 +1,12 @@
 
+addpath('./chDirCode/', './chDirCode/l1ktools_lib/')
+
 %% get all the files and information about them
 folder = './allQNORM/';
 files = dir([folder 'L*gct']);
 files = {files(:).name}';
 
-% fill up the table with the information about each file
+% fill up the table with the information about each file (based on LJP56 file names)
 t_files = table(files, ...
     cellfun2(@(x) x{1}{1}, regexp(files, '(LJP00[5-6])_', 'tokens')), ...
     cellfun2(@(x) x{1}{1}, regexp(files, 'LJP00[5-6]_(\w+)_[0-9]*H_', 'tokens')), ...

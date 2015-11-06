@@ -9,15 +9,15 @@ function [ res ] = permuByRepCount( unitV,repCount )
 %
 % generate a distributioni for each count >=2
 
-permuCount = 50000;
+permuCount = 100000;
 [repCountUnique,~] = count_unique(repCount);
 noDistIdx = repCountUnique == 1; % no between-rep distance if there is only one rep.
 repCountUnique(noDistIdx) = [];
 expmCount = size(unitV,2);
-
+res = struct;
 for i = 1:numel(repCountUnique)
     currentRepCount = repCountUnique(i);
-    eval(sprintf('res.repCount%d = zeros(permuCount,1);',currentRepCount));
+    res.([repCount num2str(currentRepCount)]) = zeros(permuCount,1);
     for j = 1:permuCount
         permu = randperm(expmCount,currentRepCount);
         sample = unitV(:,permu);

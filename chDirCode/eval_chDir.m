@@ -1,5 +1,5 @@
-function [ b] = chDir( ctrl,expm,r )
-%       This function caclulates the  characteristic direction for a gene 
+function b = eval_chDir( ctrl,expm,r )
+%       This function calculates the  characteristic direction for a gene 
 %       expression dataset.
 %  	ctrl: control gene expressoion data
 %  	expm: experiment gene expression data

@@ -24,7 +24,7 @@ parfor i = 1:numel(expmArr)
     perCtrl(constantGenesIdx,:) = [];
     expmVector(constantGenesIdx,:) = [];
     
-    unitV = chDir(perCtrl,expmVector);
+    unitV = eval_chDir(perCtrl,expmVector);
     
     %insert filtered constant genes back and assign zeros to them.
     unitV = insertRemovedGenes(unitV,constantGenesIdx);

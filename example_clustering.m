@@ -1,4 +1,6 @@
 
+addpath('./clusteringCode/')
+
 %% clustering all perturbations
 
 % parameters for clustering
