@@ -7,6 +7,9 @@ files = dir([folder 'L*gct']);
 files = {files(:).name}';
 
 % fill up the table with the information about each file (based on LJP56 file names)
+%   this can be personalized and adapted to the project, the necessary
+%   variables in the table is 'filename', everything else can be either
+%   keys or annotations
 t_files = table(files, ...
     cellfun2(@(x) x{1}{1}, regexp(files, '(LJP00[5-6])_', 'tokens')), ...
     cellfun2(@(x) x{1}{1}, regexp(files, 'LJP00[5-6]_(\w+)_[0-9]*H_', 'tokens')), ...
@@ -15,11 +18,12 @@ t_files = table(files, ...
     cell2mat(cellfun2(@(x) str2num(x{1}{1}), regexp(files, '_n(\d*)x', 'tokens'))), ...
     'variablenames', {'filename' 'LJPplate' 'CellLine' 'Time' 'replicateCount' 'Ncond'});
 
-% get all different conditions (cell line, LJPplate, time point) based on
-% the table with the file names
+% get the keys (i.e. different conditions to merge as e.g. cell line,
+% LJPplate, time point) based on the table with the file names
 t_conditions = unique(t_files(:,{'CellLine' 'LJPplate' 'Time'}));
 
 % matching the variables in the Broad L1000 .gct file to desired variable names
+%   these are the varaibles that will be saved and pass back to t_chDir)
 VariableNames = {
     'cell_id' 'CellLine'
     'rna_plate' 'LJPplate'

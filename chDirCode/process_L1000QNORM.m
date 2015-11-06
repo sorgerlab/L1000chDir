@@ -2,8 +2,7 @@ function [t_chDir, chDir, L1000genes] = process_L1000QNORM(t_conditions, t_files
 %
 % [t_chDir, chDir, L1000genes] = process_L1000QNORM(t_conditions, t_files, folder, VariableNames)
 %
-%	calculation of the chDir across conditions and plates (see
-%	example_L1000processing.m)
+%	calculation of the chDir across conditions and plates (see example_L1000processing.m)
 %
 %   t_conditions:   list of unique conditions (table with set of keys)
 %   t_files:        list of QNORM files (table with file names 

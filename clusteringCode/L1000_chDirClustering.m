@@ -1,14 +1,32 @@
-function [newCidx, Ccenters, Cdistance, ClDist, Cltree, ClleafOrder] = L1000_chDirClustering(chDir, clusteringPara)
-% [newCidx, Ccenters, Cdistance, ClDist, Cltree, ClleafOrder] = L1000_chDirClustering(chDir, clusteringPara)
+function [finalCidx, Ccenters, Cdistance, ClDist, Cltree, ClleafOrder] = L1000_chDirClustering(chDir, clusteringPara)
+% [finalCidx, Ccenters, Cdistance, ClDist, Cltree, ClleafOrder] = 
+%                           L1000_chDirClustering(chDir, clusteringPara)
 % 
-% Nrepeat = 101; 
-% Cutoff = 0.55;
-% pval = .05;
-% opt = [1.22, 150, 2e-6, 0];
-% 
-% clusteringPara = struct('Nrepeat', Nrepeat, 'Cutoff', Cutoff, ...
-%     'maxpval', pval, 'FuzzyOpt', opt);
+%   Clustering of the chracteristic directions using a soft clustering
+%   based on the cosine distances between perturbations.
+%   
+%   chDir: output of process_L1000QNORM (perturbations x genes matrix)%   
+%   clusteringPara: structure with variables:
+%           - Nrepeat (# of runs for clustering)
+%           - Cutoff  (cutoff for assigning perturbation to a cluster --
+%                       majority is recommended)
+%           - FuzzyOpt (parameters from the fcm clustering:
+%                   1: exponent for the matrix U
+%                   2: maximum number of iterations
+%                   3: minimum amount of improvement for convergence
+%                   4: info display during iterations
+%               suggested values:
+%                       clusteringPara = struct('Nrepeat', 101, 'Cutoff', 0.55, ...
+%                               'FuzzyOpt', [1.25, 150, 2e-6, 0]);
 %
+%   finalCidx:  cluster index for each perturbation
+%   Ccenters:   average chDir for each cluster
+%   Cdistance:  distance between each perturbation and its cluster chDir
+%   ClDist:     distance between cluster chDir
+%   Cltree:     clustering tree of the cluster chDir
+%   ClleafOrder: optimal leaf order for the clustering tree of the cluster chDir
+%
+
 
 Nclust = clusteringPara.Nclust;
 Nrepeat = clusteringPara.Nrepeat;
@@ -88,7 +106,6 @@ for i=1:size(newCidx,1)
     end
 end
 Cidx = max_cntvalue(newCidx');
-allCidx = newCidx;
 
 
 %% Evaluate the center of each cluster
@@ -116,9 +133,9 @@ ClDist(isnan(ClDist)) = 2;
 CLsqrDist = squareform(ClDist);
 ClleafOrder = optimalleaforder(Cltree,CLsqrDist);
 
-newCidx = max(Cidx)*ones(size(Cidx));
+finalCidx = max(Cidx)*ones(size(Cidx));
 for i=1:length(ClleafOrder)
-    newCidx(ClleafOrder(i)==Cidx) = i;
+    finalCidx(ClleafOrder(i)==Cidx) = i;
 end
 
 Ccenters = Ccenters(ClleafOrder,:);

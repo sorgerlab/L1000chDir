@@ -16,7 +16,8 @@ Selected_chDir = chDir(t_chDir.pvalue<clusteringPara.maxpval,:);
 t_selected = t_chDir(t_chDir.pvalue<clusteringPara.maxpval,:);
 
 % clustering algorithm
-[Cidx, Ccenters, Cdistance, ClDist, Cltree, ClleafOrder] = L1000_chDirClustering(Selected_chDir, clusteringPara);
+[Cidx, Ccenters, Cdistance, ClDist, Cltree, ClleafOrder] = ...
+    L1000_chDirClustering(Selected_chDir, clusteringPara);
 
 % annotation of the perturbation
 t_clustered_data = [t_selected  table(Cidx,Cdistance)];
@@ -29,6 +30,9 @@ save(['clustered_L1000_p' num2str(clusteringPara.maxpval) '_Ncl' num2str(cluster
 %% print the results for each cluster
 
 % this should be fill up with relevant information
+%   these are default output; not everything is needed (see help for
+%   print_stats_clusters)
+
 t_clustered_data.DrugClass = ...
     categorical(repmat({'-'}, height(t_clustered_data),1));
 t_clustered_data.cellular_function = ...
@@ -44,6 +48,9 @@ table2tsv(t_clustered_data, [savefolder '.tsv'])
 
 % need a structure with parameters for plotting 
 %     ## this function needs to be generalized ##
+%     ## currently working for the variables:
+%               CellLine, TimePoint, Conc, DrugClass, GRvalue
+%
 pv = struct( ...
     'CellLine' , unique(t_clustered_data.CellLine), ...
     'TimePoint', unique(t_clustered_data.Time), ...
