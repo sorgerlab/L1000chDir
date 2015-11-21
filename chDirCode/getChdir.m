@@ -33,7 +33,7 @@ parfor i = 1:numel(expmArr)
     
     expmArr{i}.chdir = unitV;
     
-    %caculate projected distance
+    %calculate projected distance
     expmArr{i}.pMetric = projectedMetric(perCtrl,expmVector,unitV);
 end
 
